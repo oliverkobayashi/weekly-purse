@@ -113,7 +113,7 @@ npx cap open android
 - Como criar interfaces intuitivas para controle financeiro
 - Balanceamento entre funcionalidades e simplicidade
 
-### Possíveis melhorias:
+### Futuras melhorias:
 - 🔄 Sincronização em nuvem para backup dos dados
 - 📊 Relatórios mensais e análises mais detalhadas
 - 🏷️ Sistema de categorização de gastos
@@ -127,7 +127,7 @@ npx cap open android
 
 ### 👨‍💻 Desenvolvedor: Oliver Kobayashi
 
-- **LinkedIn:** [linkedin.com/in/oliver-kobayashi](https://linkedin.com/in/oliver-kobayashi)
+- **LinkedIn:** [linkedin.com/in/oliverkobayashi](https://linkedin.com/in/oliverkobayashi)
 - **GitHub:** [github.com/oliverkobayashi](https://github.com/oliverkobayashi)
 - **Email:** oliverkobayashi@gmail.com
 ---

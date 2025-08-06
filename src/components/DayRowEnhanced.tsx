@@ -1,7 +1,6 @@
-
 import React from 'react';
-import { DayBudget } from '../utils/storage';
-import { isToday } from '../utils/dateUtils';
+import { DayBudget } from '@/utils/storage';
+import { isToday } from '@/utils/dateUtils';
 import { motion } from 'framer-motion';
 import { Calendar, TrendingUp, TrendingDown, Clock, CheckCircle } from 'lucide-react';
 

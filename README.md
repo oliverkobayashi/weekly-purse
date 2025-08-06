@@ -127,7 +127,7 @@ npx cap open android
 
 ### 👨‍💻 Desenvolvedor: Oliver Kobayashi
 
-- **LinkedIn:** [linkedin.com/in/oliver-kobayashi](https://linkedin.com/in/oliver-kobayashi)
+- **LinkedIn:** [linkedin.com/in/oliverkobayashi](www.linkedin.com/in/oliverkobayashi)
 - **GitHub:** [github.com/oliverkobayashi](https://github.com/oliverkobayashi)
 - **Email:** oliverkobayashi@gmail.com
 ---

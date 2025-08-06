@@ -8,13 +8,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 
+// Theme
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 // Custom components
 import Header from "@/components/Header";
 import Welcome from "@/components/Welcome";
 import BudgetCard from "@/components/BudgetCard";
 import Loading from "@/components/Loading";
 import CreateBudgetModal from "@/components/CreateBudgetModal";
-import ExpenseModal from "@/components/ExpenseModal";
+import ExpenseModalEnhanced from "@/components/ExpenseModalEnhanced";
+import QuickActions from "@/components/QuickActions";
+import StatsOverview from "@/components/StatsOverview";
 
 // Hooks and utilities
 import { useBudget } from "@/hooks/useBudget";
@@ -80,36 +85,50 @@ const MainApp = () => {
         hasCurrentPlan={!!currentPlan}
       />
       
-      <main className="container max-w-md mx-auto pt-24 px-4">
-        <AnimatePresence mode="wait">
-          {loading ? (
-            <Loading key="loading" />
-          ) : !currentPlan ? (
-            <Welcome key="welcome" onCreateBudget={() => setShowCreateModal(true)} />
-          ) : (
-            <motion.div
-              key="budget-content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <BudgetCard 
-                plan={currentPlan} 
-                onAddExpense={() => setShowExpenseModal(true)} 
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-      
-      {/* Modals */}
+        <main className="container max-w-md mx-auto pt-24 px-4">
+          <AnimatePresence mode="wait">
+            {loading ? (
+              <Loading key="loading" />
+            ) : !currentPlan ? (
+              <div key="welcome">
+                <QuickActions 
+                  onAddExpense={() => setShowExpenseModal(true)}
+                  onCreateBudget={() => setShowCreateModal(true)}
+                  hasCurrentPlan={false}
+                />
+                <Welcome onCreateBudget={() => setShowCreateModal(true)} />
+              </div>
+            ) : (
+              <motion.div
+                key="budget-content"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="space-y-6"
+              >
+                <QuickActions 
+                  onAddExpense={() => setShowExpenseModal(true)}
+                  onCreateBudget={() => setShowCreateModal(true)}
+                  hasCurrentPlan={true}
+                />
+                
+                <StatsOverview currentPlan={currentPlan} />
+                
+                <BudgetCard 
+                  plan={currentPlan} 
+                  onAddExpense={() => setShowExpenseModal(true)} 
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>      {/* Modals */}
       <CreateBudgetModal 
         isOpen={showCreateModal}
         onClose={() => setShowCreateModal(false)}
         onSubmit={handleCreateBudget}
       />
       
-      <ExpenseModal 
+      <ExpenseModalEnhanced 
         isOpen={showExpenseModal}
         onClose={() => setShowExpenseModal(false)}
         onSubmit={handleAddExpense}
@@ -120,18 +139,20 @@ const MainApp = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner position="top-center" />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainApp />} />
-          <Route path="*" element={<MainApp />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner position="top-center" />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainApp />} />
+            <Route path="*" element={<MainApp />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;
